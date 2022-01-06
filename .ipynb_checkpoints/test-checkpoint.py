@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -18,7 +18,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -34,17 +34,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": null,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "[Errno 2] No such file or directory: './data/MUTAG/MUTAG_node_attributes.txt'\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "dataset = data.load_compact_data('MUTAG')\n",
     "X, y = zip(*dataset)"
@@ -59,7 +51,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -77,7 +69,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -93,7 +85,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": null,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -109,44 +101,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": null,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "2022-01-05 22:02:02.933380: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA\n",
-      "To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Epoch 1/10\n",
-      "5/5 [==============================] - 3s 14ms/step - loss: 0.6553 - accuracy: 0.6933\n",
-      "Epoch 2/10\n",
-      "5/5 [==============================] - 0s 2ms/step - loss: 0.5637 - accuracy: 0.7800\n",
-      "Epoch 3/10\n",
-      "5/5 [==============================] - 0s 2ms/step - loss: 0.5205 - accuracy: 0.8000\n",
-      "Epoch 4/10\n",
-      "5/5 [==============================] - 0s 3ms/step - loss: 0.4407 - accuracy: 0.7933\n",
-      "Epoch 5/10\n",
-      "5/5 [==============================] - 0s 2ms/step - loss: 0.4344 - accuracy: 0.8600\n",
-      "Epoch 6/10\n",
-      "5/5 [==============================] - 0s 3ms/step - loss: 0.3965 - accuracy: 0.8800\n",
-      "Epoch 7/10\n",
-      "5/5 [==============================] - 0s 2ms/step - loss: 0.4002 - accuracy: 0.8533\n",
-      "Epoch 8/10\n",
-      "5/5 [==============================] - 0s 3ms/step - loss: 0.3419 - accuracy: 0.8800\n",
-      "Epoch 9/10\n",
-      "5/5 [==============================] - 0s 2ms/step - loss: 0.3424 - accuracy: 0.8667\n",
-      "Epoch 10/10\n",
-      "5/5 [==============================] - 0s 2ms/step - loss: 0.3004 - accuracy: 0.8800\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "pscn.fit(X_train, y_train)"
    ]

@@ -47,8 +47,7 @@ class PSCN():
         model.add(second_conv_layer)
         model.add(Flatten())
         # ReLU units
-        model.add(Dense(128,
-                        activation='relu'))
+        model.add(Dense(128, activation='relu'))
         # Regularizer
         model.add(Dropout(0.5))
 
