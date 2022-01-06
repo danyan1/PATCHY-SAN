@@ -7,20 +7,21 @@ data_path = './data/'
 
 # Mapping of graph datasets to folder names
 dataset_dict = {
-    'mutag' : 'MUTAG'
+    'mutag': 'MUTAG'
 }
 
 # All possible file extensions for data files
 file_extensions = {
-    'compulsory' : [
-        'A', # Adjacency list
+    'compulsory': [
+        'A',  # Adjacency list
         'graph_labels',
         'node_labels'
     ],
-    'optional' : [
-        'edge_labels' # Edge attributes
+    'optional': [
+        'edge_labels'  # Edge attributes
     ]
 }
+
 
 # Loads graph dataset in compact format and processes them into nx graph objects
 def load_compact_data(file_name):
@@ -34,12 +35,12 @@ def load_compact_data(file_name):
         node_labels = graph_data['node_labels']
     except KeyError:
         pass
-    
+
     try:
         node_attributes = graph_data['node_attributes']
     except KeyError:
         pass
-    
+
     # TODO: Add edge attributes
     data = []
 
@@ -48,7 +49,7 @@ def load_compact_data(file_name):
         x = nx.Graph()
 
         # Loop through adjacency list for current graph
-        for node in graph_indicator[i+1]:
+        for node in graph_indicator[i + 1]:
             if node not in dict(x.nodes()):
                 x.add_node(node)
 
@@ -58,7 +59,7 @@ def load_compact_data(file_name):
                 x.add_node(node, node_label=node_label)
             except NameError:
                 pass
-            
+
             try:
                 node_attr = node_attributes[node]
                 x.add_node(node, node_attributes=node_attr)
@@ -69,9 +70,10 @@ def load_compact_data(file_name):
             for neighbour in adjacency_list[node]:
                 x.add_edge(node, neighbour)
 
-        data.append((x, class_labels[i])) 
+        data.append((x, class_labels[i]))
 
     return data
+
 
 # Reads the data from graph datasets in compact format
 # and returns the respective read data in the form of a dictionary
@@ -83,9 +85,9 @@ def process_compact_files(data_path, file_name):
     graph_indicator = read_graph_indicator(data_path, file_name + '_graph_indicator.txt')
 
     graph_data = {
-        'class_labels' : class_labels,
-        'adjacency_list' : adjacency_list,
-        'graph_indicator' : graph_indicator
+        'class_labels': class_labels,
+        'adjacency_list': adjacency_list,
+        'graph_indicator': graph_indicator
     }
 
     # Optional files
@@ -95,7 +97,7 @@ def process_compact_files(data_path, file_name):
         graph_data['node_labels'] = node_labels
     except FileNotFoundError as e:
         print(e)
-        
+
     # Node attributes
     try:
         node_attributes = read_node_attributes(data_path, file_name + '_node_attributes.txt')
@@ -104,7 +106,7 @@ def process_compact_files(data_path, file_name):
         print(e)
 
     return graph_data
-    
+
 
 #################################
 #   Driver code for file I/O    #
@@ -112,7 +114,7 @@ def process_compact_files(data_path, file_name):
 
 # Partitions lines based into a list of lines using 
 # the given delimiter, else whitespace
-def partition(lines, delimiter=lambda x : x.isspace()):
+def partition(lines, delimiter=lambda x: x.isspace()):
     section = []
     for line in lines:
         if delimiter(line):
@@ -126,6 +128,7 @@ def partition(lines, delimiter=lambda x : x.isspace()):
     if section:
         yield section
 
+
 def read_graph_labels(data_path, file_name):
     labels = []
 
@@ -136,6 +139,7 @@ def read_graph_labels(data_path, file_name):
 
     return labels
 
+
 def read_adjacency_list(data_path, file_name):
     # Adjacency list in the form of dictionary
     adjacency_list = defaultdict(list)
@@ -144,10 +148,11 @@ def read_adjacency_list(data_path, file_name):
         adjacency_lines = list(partition(f))
 
         for line in adjacency_lines[0]:
-            u, v =  line.split(',')
+            u, v = line.split(',')
             adjacency_list[int(u)].append(int(v))
-        
+
     return adjacency_list
+
 
 def read_graph_indicator(data_path, file_name):
     graph_to_nodes = defaultdict(list)
@@ -160,6 +165,7 @@ def read_graph_indicator(data_path, file_name):
 
     return graph_to_nodes
 
+
 def read_node_attributes(data_path, file_name):
     node_attributes = {}
 
@@ -171,12 +177,13 @@ def read_node_attributes(data_path, file_name):
 
     return node_attributes
 
+
 def read_node_labels(data_path, file_name):
     node_labels = {}
 
     with open(data_path + file_name, 'r') as f:
         labels = list(partition(f))
-        
+
         for node_id, label in enumerate(labels[0]):
             node_labels[node_id + 1] = int(label)
 
